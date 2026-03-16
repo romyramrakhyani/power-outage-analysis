@@ -37,7 +37,7 @@ First, I looked at the individual distributions of our primary features: **Comme
 <iframe src="assets/fig2_outage_dur_dist.html" width="800" height="600" frameborder="0"></iframe>
 
 ### Bivariate Analysis
-Next, I explored the relationship between the commercial sales proportion and the duration of the outages using a scatter plot and a box plot.  
+Next, I explored the relationship between the commercial sales proportion and the duration of the outages using a scatter plot and a box plot.
 <iframe src="assets/fig3_bivariate_scatter.html" width="800" height="600" frameborder="0"></iframe>
 
 <iframe src="assets/fig4_bivariate_box.html" width="800" height="600" frameborder="0"></iframe>
