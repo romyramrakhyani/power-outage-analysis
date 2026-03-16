@@ -1,3 +1,20 @@
+<style>
+  /* This changes the top banner to a solid Navy Blue */
+  .page-header {
+    background-color: #000080 !important;
+    background-image: none !important;
+  }
+  
+  /* This makes the main title text white so it pops */
+  .project-name, .project-tagline {
+    color: white !important;
+  }
+  
+  /* This changes the headers in the text to Navy instead of green */
+  h1, h2, h3, h4, h5, h6 {
+    color: #000080 !important;
+  }
+</style>
 # Predictive Modeling of Power Outage Durations
 **By: Romy Ramrakhyani**
 
