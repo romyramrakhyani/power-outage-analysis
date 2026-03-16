@@ -31,28 +31,26 @@ Here are the first few rows of the cleaned dataset:
 | Minnesota    |   0.339826 |   0.362059 |   0.297795 |                   2 |                  1740 |
 
 ### Univariate Analysis
-First, I looked at the distribution of our primary features. 
-
+First, I looked at the individual distributions of our primary features: **Commercial Electrical Sales Proportion (`COM.PROP`)** and **Outage Duration (`OUTAGE.DURATION`)**.  
 <iframe src="assets/fig1_com_prop_dist.html" width="800" height="600" frameborder="0"></iframe>
 
 <iframe src="assets/fig2_outage_dur_dist.html" width="800" height="600" frameborder="0"></iframe>
 
 ### Bivariate Analysis
-Next, I explored the relationship between the commercial sales proportion and the duration of the outages.
-
+Next, I explored the relationship between the commercial sales proportion and the duration of the outages using a scatter plot and a box plot.  
 <iframe src="assets/fig3_bivariate_scatter.html" width="800" height="600" frameborder="0"></iframe>
 
 <iframe src="assets/fig4_bivariate_box.html" width="800" height="600" frameborder="0"></iframe>
 
 ### Aggregates
-Grouping the data by High vs. Low commercial footprint reveals interesting differences in the average and median outage durations:
+Grouping the data by High vs. Low commercial footprint reveals interesting differences in the average and median outage durations. Surprisingly, the data shows that states with a **High Commercial** footprint actually experience noticeably *shorter* median outage durations (622 minutes) compared to **Low Commercial** states (1098.5 minutes).
 
 | COM_CATEGORY    | Count | Median Duration | Mean Duration | Max Duration | Mean COM.PROP |
 |:----------------|:------|:----------------|:--------------|:-------------|:--------------|
 | High Commercial | 694   | 622.0           | 2721.74       | 78377.0      | 0.437645      |
 | Low Commercial  | 704   | 1098.5          | 2821.30       | 108653.0     | 0.308217      |
 
-And breaking this down further by the time of day the outage started:
+I broke this down further by the time of day the outage started:
 
 | COM_CATEGORY    | Night (Midnight-5AM) | Morning (6AM-11AM) | Afternoon (Noon-5PM) | Evening (6PM-Midnight) |
 |:----------------|:---------------------|:-------------------|:---------------------|:-----------------------|
@@ -66,7 +64,7 @@ And breaking this down further by the time of day the outage started:
 I believe the `DEMAND.LOSS.MW` (Demand Loss in Megawatts) column is potentially **NMAR (Not Missing At Random)**. The data generating process for this column likely relies on the utility company's ability to accurately monitor grid loads during an ongoing crisis. If an outage is incredibly severe or catastrophic, the physical monitoring equipment itself may lose power, or the utility workers may be too overwhelmed with emergency response to accurately record the demand drop. Therefore, the missingness depends on the actual (unrecorded) severity of the demand loss itself. To make this data MAR (Missing At Random), we would need to obtain additional data, such as a "Severe Weather Category" or the "Number of Active Utility Workers Deployed", which could explain the lack of monitoring capacity.
 
 ### Missingness Dependency
-I evaluated whether the missingness of the `DEMAND.LOSS.MW` column was dependent on other columns in the dataset. 
+I evaluated whether the missingness of the `DEMAND.LOSS.MW` column was dependent on other columns in the dataset using permutation tests. For each test, I used the **Difference in Means** as the test statistic to determine if the distribution of a secondary variable differed significantly when `DEMAND.LOSS.MW` was present versus when it was missing.
 
 **Test 1: Commercial Proportion (COM.PROP)**
 I ran a permutation test to see if the missingness of Demand Loss depends on the commercial sales proportion of the state. With a p-value of 0.0190 (which is less than my significance level of 0.05), we reject the null hypothesis. The missingness of Demand Loss is dependent on the commercial proportion (MAR).
