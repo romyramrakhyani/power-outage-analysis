@@ -1,4 +1,3 @@
-# Predictive Modeling of Power Outage Durations
 **By: Romy Ramrakhyani**
 
 ## Introduction
