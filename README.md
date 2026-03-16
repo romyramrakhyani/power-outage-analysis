@@ -23,7 +23,13 @@ To prepare the data for analysis, I performed the following cleaning steps:
 
 Here are the first few rows of the cleaned dataset:
 
-[PASTE YOUR OUTAGES.HEAD() MARKDOWN TABLE HERE]
+| U.S._STATE   |   RES.PROP |   COM.PROP |   IND.PROP |   OUTAGE.START.HOUR |   CALCULATED.DURATION |
+|:-------------|-----------:|-----------:|-----------:|--------------------:|----------------------:|
+| Minnesota    |   0.355491 |   0.32225  |   0.322024 |                  17 |                  3060 |
+| Minnesota    |   0.300325 |   0.342104 |   0.357276 |                  18 |                     1 |
+| Minnesota    |   0.280977 |   0.34501  |   0.37366  |                  20 |                  3000 |
+| Minnesota    |   0.319941 |   0.335433 |   0.344393 |                   4 |                  2550 |
+| Minnesota    |   0.339826 |   0.362059 |   0.297795 |                   2 |                  1740 |
 
 ### Univariate Analysis
 First, I looked at the distribution of our primary features. 
@@ -42,11 +48,17 @@ Next, I explored the relationship between the commercial sales proportion and th
 ### Aggregates
 Grouping the data by High vs. Low commercial footprint reveals interesting differences in the average and median outage durations:
 
-[PASTE YOUR GROUPBY_AGG MARKDOWN TABLE HERE]
+| COM_CATEGORY    | Count | Median Duration | Mean Duration | Max Duration | Mean COM.PROP |
+|:----------------|:------|:----------------|:--------------|:-------------|:--------------|
+| High Commercial | 694   | 622.0           | 2721.74       | 78377.0      | 0.437645      |
+| Low Commercial  | 704   | 1098.5          | 2821.30       | 108653.0     | 0.308217      |
 
 And breaking this down further by the time of day the outage started:
 
-[PASTE YOUR PIVOT_AGG MARKDOWN TABLE HERE]
+| COM_CATEGORY    | Night (Midnight-5AM) | Morning (6AM-11AM) | Afternoon (Noon-5PM) | Evening (6PM-Midnight) |
+|:----------------|:---------------------|:-------------------|:---------------------|:-----------------------|
+| High Commercial | 1185.0               | 420.0              | 396.0                | 1140.0                 |
+| Low Commercial  | 1919.0               | 517.5              | 510.0                | 1430.0                 |
 
 
 ## Assessment of Missingness
@@ -69,7 +81,7 @@ I ran a second test against the residential proportion. With a p-value of 0.8140
 
 
 ## Hypothesis Testing
-TTo formally answer my research question, I ran a permutation test to determine if there is a statistically significant correlation between a state's commercial electricity proportion (`COM.PROP`) and the duration of its outages (`OUTAGE.DURATION`).
+To formally answer my research question, I ran a permutation test to determine if there is a statistically significant correlation between a state's commercial electricity proportion (`COM.PROP`) and the duration of its outages (`OUTAGE.DURATION`).
 
 * **Null Hypothesis:** There is no correlation between commercial proportion and outage duration. Any observed correlation is due to random chance.
 * **Alternative Hypothesis:** There is a correlation between commercial proportion and outage duration.
